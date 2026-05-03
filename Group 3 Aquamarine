@@ -1,0 +1,117 @@
+def greet_user(name):
+    print("Hello", name, "! You are in the home page!") 
+
+
+def display_stock(apple, orange, peanut, choco):
+    print("===== STORE STOCK =====")
+    print("Apple Juice:", apple if apple > 0 else "OUT OF STOCK")
+    print("Orange Juice:", orange if orange > 0 else "OUT OF STOCK")
+    print("Peanut Presco:", peanut if peanut > 0 else "OUT OF STOCK")
+    print("Choco Presco:", choco if choco > 0 else "OUT OF STOCK")
+
+
+def manager_menu(name, apple, orange, peanut, choco):
+    print("Welcome,", name, "!")
+
+    while True:
+        print("1. View total number of items in Inventory")
+        print("2. Back")
+
+        sub = input("Choose: ")
+
+        if sub == "1":
+            display_stock(apple, orange, peanut, choco)
+        elif sub == "2":
+            break
+        else:
+            print("Invalid input.")
+
+
+def cashier_menu(apple, orange, peanut, choco):
+    print("Welcome, Cashier!")
+
+    while True:
+        print("1. Input imported/exported items")
+        print("2. Back")
+
+        sub = input("Enter choice: ")
+
+        if sub == "1":
+            imported_apple = int(input("Apple imported: "))
+            exported_apple = int(input("Apple exported: "))
+
+            imported_orange = int(input("Orange imported: "))
+            exported_orange = int(input("Orange exported: "))
+
+            imported_peanut = int(input("Peanut Presco imported: "))
+            exported_peanut = int(input("Peanut Presco exported: "))
+
+            imported_choco = int(input("Choco Presco imported: "))
+            exported_choco = int(input("Choco Presco exported: "))
+
+            apple += imported_apple - exported_apple
+            orange += imported_orange - exported_orange
+            peanut += imported_peanut - exported_peanut
+            choco += imported_choco - exported_choco
+
+            print("Updated Inventory:")
+            display_stock(apple, orange, peanut, choco)
+
+        elif sub == "2":
+            break
+        else:
+            print("Invalid choice.")
+
+    return apple, orange, peanut, choco
+
+
+def customer_menu(apple, orange, peanut, choco):
+    while True:
+        print("1. Check product stock")
+        print("2. Back")
+
+        choice = input("Enter choice: ")
+
+        if choice == "1":
+            display_stock(apple, orange, peanut, choco)
+        elif choice == "2":
+            break
+        else:
+            print("Invalid choice.")
+
+
+# Main program
+name = input("Please enter your name: ")
+greet_user(name)
+
+apple_juice = 50
+orange_juice = 50
+peanut_presco = 50
+choco_presco = 50
+
+while True:
+    print("=== HOME PAGE ===")
+    print("1. Manager")
+    print("2. Cashier")
+    print("3. Customer")
+    print("4. Exit")
+
+    choice = input("Select your role: ")
+
+    if choice == "1":
+        manager_menu(name, apple_juice, orange_juice, peanut_presco, choco_presco)
+
+    elif choice == "2":
+        apple_juice, orange_juice, peanut_presco, choco_presco = cashier_menu(
+            apple_juice, orange_juice, peanut_presco, choco_presco
+        )
+
+    elif choice == "3":
+        customer_menu(apple_juice, orange_juice, peanut_presco, choco_presco)
+
+    elif choice == "4":
+        print("Exiting program. Goodbye!")
+        break
+
+    else:
+        print("Invalid choice. Please try again.")
