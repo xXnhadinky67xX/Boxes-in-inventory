@@ -1,8 +1,11 @@
-#function to greet the user
+# FUNCTION: greet_user
+# Purpose: Greets the user when they enter the program
 def greet_user(name):
     print("Hello", name, "! You are in the home page!") 
 
-# function to display current stock of items
+# FUNCTION: display_stock
+# Purpose: Shows current inventory status
+# If stock is 0 or less, shows OUT OF STOCK
 def display_stock(apple, orange, peanut, choco):
     print("===== STORE STOCK =====")
     # If stock is greater than 0, display quantity; otherwise show "OUT OF STOCK"
@@ -11,27 +14,32 @@ def display_stock(apple, orange, peanut, choco):
     print("Peanut Presco:", peanut if peanut > 0 else "OUT OF STOCK")
     print("Choco Presco:", choco if choco > 0 else "OUT OF STOCK")
 
-# Manager menu function
+# FUNCTION: manager_menu
+# Purpose: Allows manager to view inventory
 def manager_menu(name, apple, orange, peanut, choco):
     print("Welcome,", name, "!")
 
+    # Loop so manager can choose multiple actions
     while True:
         print("1. View total number of items in Inventory")
         print("2. Back")
 
         sub = input("Choose: ")
 
+        # If manager chooses to view stock
         if sub == "1":
-            # Show current stock
             display_stock(apple, orange, peanut, choco)
+
+        # Exit manager menu
         elif sub == "2":
-            # Return to main menu
             break
+
+        # Invalid input handling
         else:
             print("Invalid input.")
 
-# Cashier menu function 
-def cashier_menu(apple, orange, peanut, choco):
+# FUNCTION: cashier_menu
+# Purpose: Updates inventory (imports/exports)def cashier_menu(apple, orange, peanut, choco):
     print("Welcome, Cashier!")
 
     while True:
@@ -40,8 +48,10 @@ def cashier_menu(apple, orange, peanut, choco):
 
         sub = input("Enter choice: ")
 
+        # Update stock values
         if sub == "1":
-            # Input imported and exported values for each product
+
+            # INPUT IMPORTED AND EXPORTED VALUES
             imported_apple = int(input("Apple imported: "))
             exported_apple = int(input("Apple exported: "))
 
@@ -54,6 +64,7 @@ def cashier_menu(apple, orange, peanut, choco):
             imported_choco = int(input("Choco Presco imported: "))
             exported_choco = int(input("Choco Presco exported: "))
 
+            # UPDATE INVENTORY VALUES
             apple += imported_apple - exported_apple
             orange += imported_orange - exported_orange
             peanut += imported_peanut - exported_peanut
@@ -62,14 +73,20 @@ def cashier_menu(apple, orange, peanut, choco):
             print("Updated Inventory:")
             display_stock(apple, orange, peanut, choco)
 
+        # Exit cashier menu
         elif sub == "2":
             break
+
+        # Invalid input
         else:
             print("Invalid choice.")
 
+    # Return updated values to main program
     return apple, orange, peanut, choco
 
 
+# FUNCTION: customer_menu
+# Purpose: Allows customers to view stock only
 def customer_menu(apple, orange, peanut, choco):
     while True:
         print("1. Check product stock")
@@ -77,23 +94,35 @@ def customer_menu(apple, orange, peanut, choco):
 
         choice = input("Enter choice: ")
 
+        # Show stock
         if choice == "1":
             display_stock(apple, orange, peanut, choco)
+
+        # Exit menu
         elif choice == "2":
             break
+
+        # Invalid input
         else:
             print("Invalid choice.")
 
 
-# Main program
+# MAIN PROGRAM START
+
+# Ask user name
 name = input("Please enter your name: ")
+
+# Greeting message
 greet_user(name)
 
+# INITIAL INVENTORY VALUES
 apple_juice = 50
 orange_juice = 50
 peanut_presco = 50
 choco_presco = 50
 
+
+# MAIN LOOP (HOME PAGE)
 while True:
     print("=== HOME PAGE ===")
     print("1. Manager")
@@ -103,20 +132,25 @@ while True:
 
     choice = input("Select your role: ")
 
+    # Manager access
     if choice == "1":
         manager_menu(name, apple_juice, orange_juice, peanut_presco, choco_presco)
 
+    # Cashier access (updates stock)
     elif choice == "2":
         apple_juice, orange_juice, peanut_presco, choco_presco = cashier_menu(
             apple_juice, orange_juice, peanut_presco, choco_presco
         )
 
+    # Customer access (view only)
     elif choice == "3":
         customer_menu(apple_juice, orange_juice, peanut_presco, choco_presco)
 
+    # Exit program
     elif choice == "4":
         print("Exiting program. Goodbye!")
         break
 
+    # Invalid menu choice
     else:
         print("Invalid choice. Please try again.")
