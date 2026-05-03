@@ -1,15 +1,17 @@
+#function to greet the user
 def greet_user(name):
     print("Hello", name, "! You are in the home page!") 
 
-
+# function to display current stock of items
 def display_stock(apple, orange, peanut, choco):
     print("===== STORE STOCK =====")
+    # If stock is greater than 0, display quantity; otherwise show "OUT OF STOCK"
     print("Apple Juice:", apple if apple > 0 else "OUT OF STOCK")
     print("Orange Juice:", orange if orange > 0 else "OUT OF STOCK")
     print("Peanut Presco:", peanut if peanut > 0 else "OUT OF STOCK")
     print("Choco Presco:", choco if choco > 0 else "OUT OF STOCK")
 
-
+# Manager menu function
 def manager_menu(name, apple, orange, peanut, choco):
     print("Welcome,", name, "!")
 
@@ -20,13 +22,15 @@ def manager_menu(name, apple, orange, peanut, choco):
         sub = input("Choose: ")
 
         if sub == "1":
+            # Show current stock
             display_stock(apple, orange, peanut, choco)
         elif sub == "2":
+            # Return to main menu
             break
         else:
             print("Invalid input.")
 
-
+# Cashier menu function 
 def cashier_menu(apple, orange, peanut, choco):
     print("Welcome, Cashier!")
 
@@ -37,6 +41,7 @@ def cashier_menu(apple, orange, peanut, choco):
         sub = input("Enter choice: ")
 
         if sub == "1":
+            # Input imported and exported values for each product
             imported_apple = int(input("Apple imported: "))
             exported_apple = int(input("Apple exported: "))
 
