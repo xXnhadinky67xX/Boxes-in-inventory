@@ -154,3 +154,12 @@ while True:
     # Invalid menu choice
     else:
         print("Invalid choice. Please try again.")
+
+# PROJECT INFO
+# Project Title: Boxes in Inventory
+# Members: Danielle Nhadyn Mangorangca, Alexius John Lagat, Kian Joshua Salazar
+# Description:
+# This program allows:
+# - Manager to view stock
+# - Cashier to update inventory
+# - Customer to check availability
